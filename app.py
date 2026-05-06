@@ -168,9 +168,14 @@ if st.button("▶️ Run Analysis"):
         st.success("✅ Analysis Complete!")
 
         st.subheader("📊 Summary Results")
-        st.dataframe(summary_df.style.applymap(
-            lambda v: 'color:red;font-weight:bold;' if v == 'FAIL' else 'color:green;' if v == 'PASS' else ''
-        ))
+
+        styled_df = summary_df.style.map(
+            lambda v: 'color:red;font-weight:bold;' if v == 'FAIL'
+            else 'color:green;font-weight:bold;' if v == 'PASS'
+            else ''
+        )
+
+        st.write(styled_df)
 
         st.download_button(
             label="📥 Download Full Quality Report",
